@@ -55,6 +55,21 @@ LOCAL = $(TESTS) $(CWARNS)
 # enable Linux goodies
 MYCFLAGS= $(LOCAL) -std=c99 -DLUA_USE_LINUX -DLUA_USE_READLINE
 MYLDFLAGS= $(LOCAL) -Wl,-E
+
+PLATFORM=$(shell uname -s)
+
+ifeq ($(PLATFORM),Linux)
+
+MYLDFLAGS= $(LOCAL) -Wl,-E
+
+else
+
+#macos
+MYLDFLAGS= $(LOCAL) -Wl
+
+
+endif
+
 MYLIBS= -ldl -lreadline
 
 
